@@ -1,0 +1,146 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        <!-- Loader -->
+        <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+            <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+        </div>
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">Quản lý đơn hàng</div>
+        <!-- Actions -->
+        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4 gap-3">
+            <mat-form-field class="fuse-mat-dense fuse-mat-rounded min-w-64" [subscriptSizing]="'dynamic'">
+                <mat-select [(value)]="selectedValue" (selectionChange)="onStatusChanged()">
+                    <mat-option value="all">Tất cả</mat-option>
+                    <mat-option *ngFor="let status of orderStatusList" [value]="status">
+                        {{status.toString() | orderStatus}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Search -->
+            <mat-form-field class="fuse-mat-dense fuse-mat-rounded min-w-64" [subscriptSizing]="'dynamic'">
+                <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:search'"></mat-icon>
+                <input matInput [formControl]="searchInputControl" [autocomplete]="'off'" [placeholder]="'Tìm kiếm'">
+            </mat-form-field>
+        </div>
+    </div>
+
+    <!-- Orders list -->
+    <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto">
+        <ng-container *ngIf="(orders$ | async) as orders">
+            <div class="grid">
+                <!-- Header -->
+                <div class="order-grid z-10 sticky top-0 grid gap-4 py-4 px-6 md:px-8 shadow text-md font-semibold text-secondary bg-gray-50 dark:bg-black dark:bg-opacity-5"
+                    matSort matSortDisableClear>
+                    <div>Khách hàng</div>
+                    <div>Xe</div>
+                    <div [mat-sort-header]="'createAt'">Thời gian tạo</div>
+                    <div class="hidden sm:block">
+                        Đơn giá
+                    </div>
+                    <div class="hidden sm:block">
+                        Tổng cộng
+                    </div>
+                    <div class="hidden sm:block">Trạng thái</div>
+                    <div class="hidden sm:block">Chi tiết</div>
+                </div>
+                <!-- Rows -->
+                <ng-container *ngIf="orders.length > 0; else noOrders">
+                    <ng-container *ngIf="(orders$ | async) as orders">
+                        <ng-container *ngFor="let order of orders; trackBy: trackByFn">
+                            <div class="order-grid grid items-center gap-4 py-3 px-6 md:px-8 border-b">
+
+                                <!-- Customer -->
+                                <div class="truncate">
+                                    {{order.customer.name}}
+                                </div>
+
+                                <div class="truncate">
+                                    {{order.orderDetails[0].car.name}}
+                                </div>
+
+                                <!-- Name -->
+                                <div class="truncate">
+                                    {{order.createAt | date: 'dd-MM-YYYY'}}
+                                </div>
+
+                                <!-- Gender -->
+                                <div class="hidden sm:block">
+                                    {{order.unitPrice | number:'1.0-2'}} VNĐ
+                                </div>
+
+                                <!-- Phone -->
+                                <div class="hidden sm:block">
+                                    {{order.amount | number:'1.0-2'}} VNĐ
+                                </div>
+
+                                <!-- Status -->
+                                <div class="hidden sm:block truncate">
+                                    <div class="font-semibold rounded-full px-3 py-1 w-auto inline-block" [ngClass]="'text-white ' + 
+                                    (order.status === 'Canceled' ? 'bg-red-500' :
+                                    order.status === 'Pending' ? 'bg-cyan-500' :
+                                    order.status === 'ManagerConfirmed' ? 'bg-green-500' :
+                                    order.status === 'Ongoing' ? 'bg-blue-500' :
+                                    order.status === 'ReceivedTheCar' ? 'bg-teal-500' :
+                                    order.status === 'ArrivedAtPickUpPoint' ? 'bg-indigo-500' :
+                                    order.status === 'ReceivedGuests' ? 'bg-purple-500' :
+                                    order.status === 'CarOwnerApproved' ? 'bg-pink-500' :
+                                    order.status === 'Paid' ? 'bg-orange-500' :
+                                    order.status === 'ReturnedTheCar' ? 'bg-lime-500' :
+                                    order.status === 'Finished' ? 'bg-gray-500' : ''
+                                  )">
+                                        {{order.status | orderStatus}}
+                                    </div>
+                                </div>
+
+                                <!-- Action -->
+                                <div class="hidden sm:block">
+                                    <div class="flex gap-3">
+                                        <span [routerLink]="['/comercials/orders', order.id]">
+                                            <mat-icon class="text-blue-500 icon-size-5 cursor-pointer"
+                                                [svgIcon]="'heroicons_outline:eye'"></mat-icon>
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+
+            </div>
+
+            <mat-paginator
+                class="sm:absolute sm:inset-x-0 sm:bottom-0 border-b sm:border-t sm:border-b-0 z-10 bg-gray-50 dark:bg-transparent"
+                [ngClass]="{'pointer-events-none': isLoading}" [length]="pagination.totalRow"
+                [pageIndex]="pagination.pageNumber" [pageSize]="pagination.pageSize"
+                [pageSizeOptions]="[5, 10, 25, 100]" [showFirstLastButtons]="true"></mat-paginator>
+
+        </ng-container>
+
+        <ng-template #noOrders>
+            <div class="p-8 sm:p-16 border-t text-4xl font-semibold tracking-tight text-center">Không tìm thấy đơn hàng
+                nào!
+            </div>
+        </ng-template>
+
+    </div>
+
+</div>
+
+<!-- Notification -->
+<a class="cursor-pointer" *ngIf="flashMessage">
+    <fuse-alert class="absolute bottom-0 right-0 z-999" [type]="'success'" [appearance]="'border'"
+        *ngIf="flashMessage === 'success'">
+        <span fuseAlertTitle>Thành công</span>
+        {{message}}
+    </fuse-alert>
+    <fuse-alert class="absolute bottom-0 right-0 z-999" [type]="'error'" [appearance]="'border'"
+        *ngIf="flashMessage === 'error'">
+        <span fuseAlertTitle>Có lỗi xảy ra</span>
+        {{message}}
+    </fuse-alert>
+</a>

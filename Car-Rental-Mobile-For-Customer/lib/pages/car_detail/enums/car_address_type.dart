@@ -1,0 +1,1 @@
+enum CarAddressType { car, customer }

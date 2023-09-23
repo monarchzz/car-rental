@@ -1,0 +1,231 @@
+<div class="absolute inset-0 min-w-0 text-center overflow-auto print:overflow-visible" cdkScrollable>
+
+    <!-- Main -->
+    <div class="inline-block p-6 sm:p-10 text-left print:p-0">
+
+        <div class="flex gap-3 mb-6">
+
+            <fuse-card class="flex flex-col items-center max-w-80 w-full filter-listing">
+                <img class="object-cover" [src]="carImage" alt="Card cover image">
+                <div class="w-full p-6 mb-4">
+                    <div class="flex justify-between">
+                        <div class="flex flex-col">
+                            <div class="text-secondary text-md">{{ order.orderDetails[0].car.productionCompany.name }} -
+                                {{
+                                order.orderDetails[0].car.name }}</div>
+                            <div class="text-2xl font-semibold text-green-500 leading-tight mt-1">{{
+                                order.orderDetails[0].car.price |
+                                number:'1.0-2' }} VNĐ</div>
+                        </div>
+                    </div>
+                    <hr class="border-b my-4">
+                    <div class="flex flex-col text-md">
+                        <span class="whitespace-nowrap">Số ghế <b> {{
+                                order.orderDetails[0].car.model.seater}}</b></span>
+                        <span class="whitespace-nowrap">Hộp số <b> {{
+                                order.orderDetails[0].car.model.transmissionType}}</b></span>
+                        <span class="whitespace-nowrap">Nhiên liệu <b>{{ order.orderDetails[0].car.model.fuelType
+                                }}</b></span>
+                    </div>
+                    <hr class="border-b my-4">
+                    <div class="flex w-full justify-between items-center mt-3">
+                        <div class="cursor-pointer text-blue-500" (click)="openMapsViewDialog()">
+                            Xem chi tiết
+                        </div>
+                        <ng-container *ngIf="order.status === 'Ongoing'">
+                            <span class="cursor-pointer" (click)="openTrackingModel()">
+                                <mat-icon svgIcon="mat_outline:my_location"></mat-icon>
+                            </span>
+                        </ng-container>
+                    </div>
+                </div>
+            </fuse-card>
+
+            <fuse-card class="flex flex-col items-center max-w-80 w-full p-8 pb-6 filter-shopping">
+                <ng-container *ngIf="order.orderDetails[0].driver">
+                    <img class="w-32 h-32 rounded-full" src="assets/images/avatars/male-04.jpg" alt="Card cover image">
+                    <div class="text-secondary leading-tight text-center mt-8">Tài xế</div>
+                    <div class="text-2xl font-semibold leading-tight text-center mt-1">{{
+                        order.orderDetails[0].driver.name }}</div>
+                    <hr class="w-full border-t mt-8 mb-0">
+                    <div class="w-full flex items-center justify-between my-4 px-2">
+                        <div class="flex flex-col items-center">
+                            <span class="font-bold">{{ (order.orderDetails[0].driver.star | number:'1.1-2') || 'Chưa có'
+                                }}</span>
+                            <span class="text-sm font-medium text-secondary">ĐÁNH GIÁ</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span class="font-bold">{{ order.orderDetails[0].driver.finished || 'Chưa có' }}</span>
+                            <span class="text-sm font-medium text-secondary">SỐ CHUYẾN</span>
+                        </div>
+                    </div>
+                    <!-- <ng-container *ngIf="order.status == 'Pending'">
+                        <a class="px-6 mt-8" mat-flat-button [color]="'primary'" [routerLink]="['./']">
+                            Đổi tài xế
+                        </a>
+                    </ng-container> -->
+                </ng-container>
+                <ng-container *ngIf="!order.orderDetails[0].driver">
+                    <a class="flex" mat-flat-button [color]="'accent'" [routerLink]="['./']">
+                        Đơn hàng không có tài xế
+                    </a>
+                </ng-container>
+            </fuse-card>
+
+            <fuse-card class="flex flex-col items-center max-w-80 w-full p-8 pb-6 filter-shopping">
+                <img class="w-32 h-32 rounded-full" src="assets/images/avatars/male-04.jpg" alt="Card cover image">
+                <div class="text-secondary leading-tight text-center mt-8">Khách hàng</div>
+                <div class="text-2xl font-semibold leading-tight text-center mt-1">{{ order.customer.name }}</div>
+                <hr class="w-full border-t mt-8 mb-0">
+                <ng-container *ngIf="!order.orderDetails[0].driver">
+                    <div class="w-full mt-6">
+                        <a class="flex" mat-flat-button [color]="'primary'" [routerLink]="['./']"
+                            (click)="checkLicense()">
+                            Kiểm tra giấy phép
+                        </a>
+                    </div>
+                </ng-container>
+            </fuse-card>
+
+        </div>
+
+        <!-- Invoice -->
+        <div
+            class="w-240 p-8 rounded-2xl shadow bg-card print:w-auto print:rounded-none print:shadow-none print:bg-transparent">
+
+            <div class="flex items-start justify-between">
+                <div class="grid grid-cols-2 gap-x-4 gap-y-1">
+                    <div class="text-4xl tracking-tight text-secondary">ĐƠN HÀNG</div>
+                    <div></div>
+                    <div class="font-medium tracking-tight text-secondary">NGÀY TẠO</div>
+                    <div class="font-medium">{{ order.createAt | date:'dd-MM-YYYY' }}</div>
+                    <div class="font-medium tracking-tight text-secondary">GIÁ TRỊ ĐƠN HÀNG</div>
+                    <div class="font-medium">{{ order.amount | number:'1.0-2' }} VNĐ</div>
+                    <div class="font-medium tracking-tight text-secondary">TRẠNG THÁI</div>
+                    <div class="font-medium">{{ order.status | orderStatus}}</div>
+                    <div class="font-medium tracking-tight text-secondary">NGÀY KHỞI HÀNH</div>
+                    <div class="font-medium text-blue-500">{{ order.orderDetails[0].startTime| date:'dd-MM-YYYY'}}</div>
+                    <div class="font-semibold tracking-tight text-secondary">NGÀY TRẢ XE</div>
+                    <div class="font-semibold text-green-500">{{ order.orderDetails[0].endTime| date:'dd-MM-YYYY'}}
+                    </div>
+                </div>
+                <div class="grid auto-cols-max grid-flow-col gap-x-8 -mr-8 py-6 px-8 rounded-l-2xl bg-accent dark">
+                    <div class="place-self-center w-24">
+                        <img class="w-24" src="assets/images/logo/logo.svg">
+                    </div>
+                    <div class="pl-10 border-l text-md">
+                        <div class="font-medium">Công Ty Fcar</div>
+                        <div>15A Tân Hòa 2</div>
+                        <div>Thủ Đức, TP HCM</div>
+                        <div>+66 123 455 87</div>
+                        <div>support@fcar.com</div>
+                        <div>www.fcar.com</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-12 gap-x-1 mt-12">
+                <!-- Columns -->
+                <div class="col-span-7 font-medium text-md text-secondary">DỊCH VỤ</div>
+                <div class="font-medium text-md text-right text-secondary">SỐ LƯỢNG</div>
+                <div class="font-medium text-md text-right text-secondary">ĐƠN VỊ</div>
+                <div class="col-span-2 font-medium text-md text-right text-secondary">GIÁ</div>
+
+                <!-- Divider -->
+                <div class="col-span-12 my-4 border-b"></div>
+
+                <!-- Item -->
+                <div class="col-span-7 text-lg font-medium">THỜI GIAN THUÊ</div>
+                <div class="self-center text-right">{{ order.rentalTime }}</div>
+                <div class="self-center text-right">Ngày</div>
+                <div class="col-span-2 self-center text-right">{{ order.rentalTime * order.unitPrice | number:'1.0-2' }}
+                    VNĐ</div>
+
+                <!-- Divider -->
+                <div class="col-span-12 my-4 border-b"></div>
+
+                <ng-container *ngIf="order.orderDetails[0].driver">
+
+                    <!-- Item -->
+                    <div class="col-span-7 text-lg font-medium">PHÍ TÀI XẾ</div>
+                    <div class="self-center text-right">{{ order.rentalTime }}</div>
+                    <div class="self-center text-right">Ngày</div>
+                    <div class="col-span-2 self-center text-right">{{ order.rentalTime * 200000 | number:'1.0-2' }} VNĐ
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="col-span-12 my-4 border-b"></div>
+
+                    <!-- Item -->
+                    <div class="col-span-7 text-lg font-medium">PHÍ QUA ĐÊM</div>
+                    <div class="self-center text-right">{{ order.rentalTime > 2 ? order.rentalTime - 1 : 0 }}</div>
+                    <div class="self-center text-right">Ngày</div>
+                    <div class="col-span-2 self-center text-right">{{ (order.rentalTime > 2 ? (order.rentalTime - 1) *
+                        300000
+                        : 0)
+                        | number:'1.0-2' }} VNĐ</div>
+
+                    <!-- Divider -->
+                    <div class="col-span-12 my-4 border-b"></div>
+
+                </ng-container>
+
+                <!-- Item -->
+                <div class="col-span-7 text-lg font-medium">PHÍ GIAO XE</div>
+                <div class="self-center text-right">{{ order.deliveryDistance | number:'1.2-2'}}</div>
+                <div class="self-center text-right">Km</div>
+                <div class="col-span-2 self-center text-right">{{ order.deliveryFee | number:'1.0-0' }} VNĐ</div>
+
+                <!-- Divider -->
+                <div class="col-span-12 my-4 border-b"></div>
+
+                <!-- Item -->
+                <div class="col-span-7 text-lg font-medium">KHUYẾN MÃI</div>
+                <div class="self-center text-right">{{ (order.promotion?.discount || 0) | number:'1.0-0'}}</div>
+                <div class="self-center text-right">%</div>
+                <div class="col-span-2 self-center text-right">{{ (order.promotion != null ? ((car.price +
+                    order.rentalTime * 200000) *
+                    order.promotion?.discount / 100) : 0) |
+                    number:'1.0-2' }} VNĐ</div>
+
+                <!-- Divider -->
+                <div class="col-span-12 my-4 border-b"></div>
+
+                <!-- Item -->
+                <div class="col-span-7 text-lg font-medium">ĐÃ CỌC</div>
+                <div class="self-center text-right">30</div>
+                <div class="self-center text-right">%</div>
+                <div class="col-span-2 self-center text-right">{{ order.deposit | number:'1.0-2' }} VNĐ</div>
+
+                <!-- Divider -->
+                <div class="col-span-12 my-4 border-b"></div>
+
+                <!-- Spacer -->
+                <div class="col-span-12 mt-16"></div>
+
+                <!-- Total -->
+                <div class="col-span-10 self-center text-2xl font-medium tracking-tight text-secondary">TỔNG CỘNG</div>
+                <div class="col-span-2 text-right text-2xl font-medium">{{ order.amount | number:'1.0-2' }} VNĐ</div>
+            </div>
+
+        </div>
+
+        <ng-container *ngIf="order.status == 'Pending'">
+            <div class="flex gap-8 justify-between mt-5">
+                <button class="w-full" mat-flat-button [color]="'warn'" (click)="openDenyOrderDialog()">
+                    Từ chối đơn hàng
+                </button>
+                <button class="w-full" mat-flat-button [color]="'primary'" (click)="openConfirmDialog()">
+                    Xác nhận đơn hàng
+                </button>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="order.status == 'Canceled'">
+            <fuse-alert class="mt-5" [type]="'error'" [appearance]="'border'">
+                Đơn hàng này đã bị từ chối với lý do <span class="text-red-500">{{ order.description }}</span>
+                {{message}}
+            </fuse-alert>
+        </ng-container>
+    </div>
+
+</div>

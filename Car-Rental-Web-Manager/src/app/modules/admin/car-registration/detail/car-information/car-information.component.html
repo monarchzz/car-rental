@@ -1,0 +1,127 @@
+<div class="flex flex-col flex-auto -m-6">
+
+    <!-- Header -->
+    <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 shadow">
+        <span class="font-semibold text-lg">
+            Thông tin chi tiết của xe
+        </span>
+        <button mat-icon-button (click)="matDialogRef.close()" [tabIndex]="-1">
+            <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+        </button>
+    </div>
+    <div class="flex flex-col flex-auto items-center gap-6 sm:items-start p-8 pb-6 sm:pb-8 w-full">
+
+        <div class="grid grid-cols-3 w-full justify-between">
+            <div class="col-span-1">
+                <div class="flex flex-col w-full">
+                    <div class="flex items-center">
+                        <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:identification'"></mat-icon>
+                        <span class="leading-none">Biển số:
+                            <span class="font-bold">
+                                {{ carRegistration.licensePlate }}
+                            </span>
+                        </span>
+                    </div>
+                    <!-- <div class="flex items-center mt-4">
+                        <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:tag'"></mat-icon>
+                        <span class="leading-none">Mẫu:
+                            <span class="font-bold">
+                                {{ carRegistration.model }}
+                            </span>
+                        </span>
+                    </div> -->
+                    <div class="flex items-center mt-4">
+                        <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:user'"></mat-icon>
+                        <span class="leading-none">Hãng xe:
+                            <span class="font-bold">
+                                {{ carRegistration.productionCompany }}
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-1">
+                <div class="flex flex-col w-full">
+                    <div class="flex items-center">
+                        <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:view-grid'"></mat-icon>
+                        <span class="leading-none">Số chỗ ngồi:
+                            <span class="font-bold">
+                                {{ carRegistration.seater }}
+                            </span>
+                        </span>
+                    </div>
+                    <!-- <div class="flex items-center mt-4">
+                        <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:trending-up'"></mat-icon>
+                        <span class="leading-none">Độ cao gầm:
+                            <span class="font-bold">
+                                {{ carRegistration.chassis }}
+                            </span>
+                        </span>
+                    </div> -->
+                    <div class="flex items-center mt-4">
+                        <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:qrcode'"></mat-icon>
+                        <span class="leading-none">Năm sản xuất:
+                            <span class="font-bold">
+                                {{ carRegistration.yearOfManufacture }}
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-1">
+                <div class="flex flex-col w-full">
+                    <div class="flex items-center">
+                        <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:lightning-bolt'"></mat-icon>
+                        <span class="leading-none">Loại nhiên liệu:
+                            <span class="font-bold">
+                                {{ carRegistration.fuelType }}
+                            </span>
+                        </span>
+                    </div>
+                    <div class="flex items-center mt-4">
+                        <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:chip'"></mat-icon>
+                        <span class="leading-none">Hộp số:
+                            <span class="font-bold">
+                                {{ carRegistration.transmissionType }}
+                            </span>
+                        </span>
+                    </div>
+                    <div class="flex items-center mt-4">
+                        <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:beaker'"></mat-icon>
+                        <span class="leading-none">Mức tiêu hao nhiên liệu:
+                            <span class="font-bold">
+                                {{ carRegistration.fuelConsumption }}
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full">
+            <div class="flex items-center">
+                <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:link'"></mat-icon>
+                <span class="leading-none font-semibold">Giấy tờ liên quan:
+                </span>
+            </div>
+            <div class="flex flex-wrap w-full mt-3 justify-start gap-3">
+                <ng-container *ngIf="carRegistration.images.length > 0">
+                    <ng-container *ngFor="let image of carRegistration.images">
+                        <div class="object-cover h-56 w-auto shadow-lg rounded-lg" *ngIf="image.type === 'License'">
+                            <img class="w-full h-full cursor-pointer rounded-lg" [src]="image.url" alt="">
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="flex items-center">
+            <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+            <span class="leading-none">Địa chỉ xe:
+                <span class="font-bold">
+                    {{ carRegistration.location }}
+                </span>
+            </span>
+        </div>
+    </div>
+</div>
