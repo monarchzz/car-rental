@@ -1,0 +1,40 @@
+version: "3.8"
+name: car-rental
+
+services:
+  webapi:
+    container_name: webapi
+    build:
+      context: .
+      dockerfile: Application/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:5010
+      - ConnectionStrings__DefaultConnection=Data Source=localhost;Initial Catalog=CarRental;User ID=sa;Password=password;Persist Security Info=False;Encrypt=False
+    networks:
+      - car-rental-network
+    ports:
+      - 5010:5010
+    # depends_on:
+    #   - mssql
+    restart: on-failure
+
+  # mssql:
+  #   container_name: mssql
+  #   image: mcr.microsoft.com/mssql/server:latest
+  #   environment:
+  #     - SA_PASSWORD=password
+  #     - ACCEPT_EULA=Y
+  #   ports:
+  #     - 1433:1433
+  #   restart: always
+  #   volumes:
+  #     - mssqlvolume:/var/opt/mssql
+  #   networks:
+  #     - car-rental-network
+
+networks:
+  car-rental-network:
+    name: car-rental-network
+# volumes:
+#   mssqlvolume:

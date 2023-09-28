@@ -33,8 +33,8 @@ builder.Services.AddCors(options =>
                           policy.AllowAnyHeader();
                           policy.AllowAnyMethod();
                           policy.WithOrigins(
-                              "http://localhost:4200", 
-                              "https://carrentalwebmanager.web.app", 
+                              "http://localhost:4200",
+                              "https://carrentalwebmanager.web.app",
                               "https://car-rental-236aa.web.app");
                           policy.AllowCredentials();
                       });
@@ -58,7 +58,7 @@ app.UseSwaggerUI();
 
 app.UseJwt();
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseRouting();
 
