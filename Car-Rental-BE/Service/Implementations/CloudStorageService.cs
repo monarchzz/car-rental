@@ -34,7 +34,7 @@ public class CloudStorageService : ICloudStorageService
                 stream,
                 null,
                 CancellationToken.None);
-            var url = "https://firebasestorage.googleapis.com/v0/b/car-rental-236aa.appspot.com/o/attachments%2F" + id + "?alt=media";
+            var url = "https://firebasestorage.googleapis.com/v0/b/car-rental-2e561.appspot.com/o/attachments%2F" + id + "?alt=media";
             return url;
             //return CloudStorageHelper.GenerateV4UploadSignedUrl(
             //    _settings.Bucket,
