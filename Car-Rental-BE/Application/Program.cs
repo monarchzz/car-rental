@@ -8,7 +8,6 @@ using Newtonsoft.Json.Serialization;
 using Utility.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 builder.Services.Configure<AppSetting>(builder.Configuration.GetSection("AppSetting"));
 builder.Services.AddHttpClient();
@@ -25,20 +24,7 @@ builder.Services.AddControllersWithViews()
     }
 );
 builder.Services.AddSwaggerGenNewtonsoftSupport();
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy =>
-                      {
-                          policy.AllowAnyHeader();
-                          policy.AllowAnyMethod();
-                          policy.WithOrigins(
-                              "http://localhost:4200",
-                              "https://carrentalwebmanager.web.app",
-                              "https://car-rental-236aa.web.app");
-                          policy.AllowCredentials();
-                      });
-});
+builder.Services.AddCors();
 builder.Services.AddSignalR();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -48,7 +34,11 @@ builder.Services.AddAutoMapper(typeof(GeneralProfile));
 
 var app = builder.Build();
 
-app.UseCors(MyAllowSpecificOrigins);
+app.UseCors(x => x
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .SetIsOriginAllowed(origin => true) // allow any origin
+            .AllowCredentials());
 
 // Configure the HTTP request pipeline.
 
