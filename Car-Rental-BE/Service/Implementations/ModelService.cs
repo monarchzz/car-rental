@@ -31,7 +31,7 @@ namespace Service.Implementations
             var models = await query
                 .Skip(pagination.PageNumber * pagination.PageSize).Take(pagination.PageSize).AsNoTracking().ToListAsync();
             var totalRow = await query.AsNoTracking().CountAsync();
-            return models != null && totalRow > 0 ? new ListViewModel<CarModelViewModel>
+            return models != null || models != null && totalRow > 0 ? new ListViewModel<CarModelViewModel>
             {
                 Pagination = new PaginationViewModel
                 {

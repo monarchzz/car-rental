@@ -30,7 +30,7 @@ namespace Service.Implementations
             .ProjectTo<ShowroomViewModel>(_mapper.ConfigurationProvider);
             var productionCompanies = await query.Skip(pagination.PageNumber * pagination.PageSize).Take(pagination.PageSize).AsNoTracking().ToListAsync();
             var totalRow = await query.AsNoTracking().CountAsync();
-            return productionCompanies != null && totalRow > 0 ? new ListViewModel<ShowroomViewModel>
+            return productionCompanies != null || productionCompanies != null && totalRow > 0 ? new ListViewModel<ShowroomViewModel>
             {
                 Pagination = new PaginationViewModel
                 {
