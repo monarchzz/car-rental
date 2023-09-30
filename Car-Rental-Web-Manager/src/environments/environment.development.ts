@@ -1,15 +1,14 @@
 export const environment = {
     production: false,
-    // baseUrl: 'https://localhost:7277',
-    baseUrl: 'https://api-carrental.azurewebsites.net',
+    baseUrl: 'https://synda.online',
     firebaseConfig: {
-        apiKey: "AIzaSyDYXbOmPpcvD-tTFqRZuDvt75nvjHou1EI",
-        authDomain: "car-rental-236aa.firebaseapp.com",
-        projectId: "car-rental-236aa",
-        storageBucket: "car-rental-236aa.appspot.com",
-        messagingSenderId: "805399031928",
-        appId: "1:805399031928:web:308457cd9b7b8ea441fd8d",
-        measurementId: "G-2GZT37VSQL"
+        apiKey: 'AIzaSyBSMHtxwcg5WBIlJIxPXo8PN2sZ793rLwg',
+        authDomain: 'car-rental-2e561.firebaseapp.com',
+        projectId: 'car-rental-2e561',
+        storageBucket: 'car-rental-2e561.appspot.com',
+        messagingSenderId: '1089171419911',
+        appId: '1:1089171419911:web:dfd4f7d6e21c3d5c6e8ba2',
+        measurementId: 'G-WBM1E5GV9Y',
     },
-    googleMapsApiKey: 'AIzaSyCLCMWTVjfn9demFARmjB0SyuCdPs5n83E'
+    googleMapsApiKey: 'AIzaSyCLCMWTVjfn9demFARmjB0SyuCdPs5n83E',
 };
