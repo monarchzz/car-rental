@@ -73,6 +73,8 @@ namespace Service.Implementations
                 .OrderByDescending(order => order.CreateAt)
                 .Skip(pagination.PageNumber * pagination.PageSize)
                 .Take(pagination.PageSize)
+                .AsSplitQuery()
+                .AsNoTracking()
                 .ProjectTo<OrderViewModel>(_mapper.ConfigurationProvider).ToListAsync();
 
             return orders != null || orders != null && orders.Any() ? new ListViewModel<OrderViewModel>
