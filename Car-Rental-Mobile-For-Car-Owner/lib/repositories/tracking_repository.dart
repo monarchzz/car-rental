@@ -31,7 +31,6 @@ class TrackingRepository {
         startListening();
         // ignore: empty_catches
       } catch (e) {
-        log('------------------');
         log(e.toString());
       }
     }

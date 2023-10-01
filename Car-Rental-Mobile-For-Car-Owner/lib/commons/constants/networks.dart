@@ -1,9 +1,9 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 String baseUrl = dotenv.env['BASE_URL'] ?? '';
-const int connectTimeout = 15000;
-const int receiveTimeout = 15000;
-const int sendTimeout = 15000;
+const int connectTimeout = 30000;
+const int receiveTimeout = 30000;
+const int sendTimeout = 30000;
 
 mixin StatusCodes {
   static const int status200OK = 200;
