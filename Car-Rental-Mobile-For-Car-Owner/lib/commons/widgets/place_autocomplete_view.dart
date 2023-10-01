@@ -41,15 +41,17 @@ class _PlaceAutocompleteViewState extends State<PlaceAutocompleteView> {
 
   @override
   void initState() {
+    super.initState();
+
     widget.debouncer.run(() {
       loadPlaces(widget.text).then((value) {
-        setState(() {
-          places = value;
-        });
+        if (mounted) {
+          setState(() {
+            places = value;
+          });
+        }
       });
     });
-
-    super.initState();
   }
 
   @override
