@@ -50,20 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAW6figldkXHsV1SqRH7MKXDIsBzpboQe4',
-    appId: '1:805399031928:android:fe1b4db73ae1fa2f41fd8d',
-    messagingSenderId: '805399031928',
-    projectId: 'car-rental-236aa',
-    storageBucket: 'car-rental-236aa.appspot.com',
+    apiKey: 'AIzaSyDKUppcSDynqzyDeX88HqHXGhKB8V82WZs',
+    appId: '1:1089171419911:android:526df664992fc1a36e8ba2',
+    messagingSenderId: '1089171419911',
+    projectId: 'car-rental-2e561',
+    storageBucket: 'car-rental-2e561.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB4PQCZJe5dvF11V0zP-QRRHJ1myo5z-yU',
-    appId: '1:805399031928:ios:360af64bc4aaec4441fd8d',
-    messagingSenderId: '805399031928',
-    projectId: 'car-rental-236aa',
-    storageBucket: 'car-rental-236aa.appspot.com',
-    iosClientId: '805399031928-15r3spgrei5qneqbfqoprbkhhjh4dnca.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBmPufioVS9Pi4nbLXNs5ZPTxHstAo9XvQ',
+    appId: '1:1089171419911:ios:dd18bdeb5d57cd6b6e8ba2',
+    messagingSenderId: '1089171419911',
+    projectId: 'car-rental-2e561',
+    storageBucket: 'car-rental-2e561.appspot.com',
     iosBundleId: 'com.example.carRentalForCustomer',
   );
 }
