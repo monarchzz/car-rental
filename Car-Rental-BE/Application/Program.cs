@@ -48,7 +48,7 @@ app.UseSwaggerUI();
 
 app.UseJwt();
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseRouting();
 
