@@ -101,13 +101,16 @@ class _PaymentWebviewViewState extends State<PaymentWebviewView> {
                         action: ServerTrustAuthResponseAction.PROCEED,
                       );
                     },
-                    onLoadStart: (controller, url) {
+                    onLoadStart: (controller, url) {},
+                    onWebViewCreated: (controller) {
+                      webViewController = controller;
+                    },
+                    onLoadStop: (controller, url) async {
+                      await pullToRefreshController.endRefreshing();
+
                       final urlStr = url?.toString() ?? '';
 
-                      if (urlStr.contains(
-                          'carrentalwebmanager.web.app/vnpay-return')) {
-                        webViewController?.stopLoading();
-
+                      if (urlStr.contains('vnpay-return')) {
                         showMessageDialog(
                           title: 'Nạp tiền thành công',
                           message: 'Bạn đã nạp tiền thành công',
@@ -115,12 +118,6 @@ class _PaymentWebviewViewState extends State<PaymentWebviewView> {
                           context.goNamed(RouteName.wallet);
                         });
                       }
-                    },
-                    onWebViewCreated: (controller) {
-                      webViewController = controller;
-                    },
-                    onLoadStop: (controller, url) async {
-                      await pullToRefreshController.endRefreshing();
                     },
                     onLoadError: (controller, url, code, message) {
                       pullToRefreshController.endRefreshing();
