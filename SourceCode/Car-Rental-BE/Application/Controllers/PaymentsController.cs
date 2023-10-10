@@ -44,7 +44,8 @@ namespace Application.Controllers
                 OrderInfo = $"Nạp tiền: {input.Amount} VNĐ",
                 IpAddress = clientIp,
                 ReturnUrl = _appSettings.ReturnUrl,
-                TmnCode = _appSettings.MerchantId
+                TmnCode = _appSettings.MerchantId,
+                OrderType = "other"
             };
 
             var result = await _vnPayService.AddRequest(auth!.Id, requestModel);

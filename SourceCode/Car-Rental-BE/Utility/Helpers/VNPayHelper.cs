@@ -13,19 +13,19 @@ public static class VnPayHelper
         var requestParams = new SortedList<string, string?>(new VnPayComparer())
         {
             { "vnp_Version", model.Version },
-            { "vnp_Locale", model.Locale },
-            { "vnp_CurrCode", model.CurrencyCode },
             { "vnp_Command", model.Command },
             { "vnp_TmnCode", model.TmnCode },
             { "vnp_Amount", (model.Amount * 100).ToString() },
+            // { "vnp_BankCode", model.BankCode }
             { "vnp_CreateDate", model.CreateDate.ToString("yyyyMMddHHmmss") },
-            { "vnp_ExpireDate", model.ExpireDate.ToString("yyyyMMddHHmmss") },
+            { "vnp_CurrCode", model.CurrencyCode },
             { "vnp_IpAddr", model.IpAddress },
+            { "vnp_Locale", model.Locale },
             { "vnp_OrderInfo", model.OrderInfo },
+            { "vnp_OrderType", model.OrderType },
             { "vnp_ReturnUrl", model.ReturnUrl },
             { "vnp_TxnRef", model.TxnRef.ToString() },
-            { "vnp_OrderType", model.OrderType },
-            { "vnp_BankCode", model.BankCode }
+            // { "vnp_ExpireDate", model.ExpireDate.ToString("yyyyMMddHHmmss") },
         };
 
         var data = new StringBuilder();
