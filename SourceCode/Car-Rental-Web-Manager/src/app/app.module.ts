@@ -20,13 +20,11 @@ import { LayoutModule } from './layout/layout.module';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,
-    scrollPositionRestoration: 'enabled'
+    scrollPositionRestoration: 'enabled',
 };
 
 @NgModule({
-    declarations: [
-        AppComponent,
-    ],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -48,11 +46,8 @@ const routerConfig: ExtraOptions = {
         AgmCoreModule.forRoot({
             apiKey: environment.googleMapsApiKey,
             libraries: ['places'],
-        })
+        }),
     ],
-    bootstrap: [
-        AppComponent
-    ],
+    bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
