@@ -1,14 +1,31 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+    ViewChild,
+    ViewEncapsulation,
+} from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { fuseAnimations } from '@fuse/animations';
-import { debounceTime, map, merge, Observable, Subject, switchMap, takeUntil } from 'rxjs';
+import {
+    debounceTime,
+    map,
+    merge,
+    Observable,
+    Subject,
+    switchMap,
+    takeUntil,
+} from 'rxjs';
 import { CreateManagerComponent } from './create/create-manager.component';
 import { ManagerService } from './manager.service';
 import { Manager, ManagerPagination } from './manager.type';
 import { UpdateManagerComponent } from './update/update-manager.component';
+import AppMessages from 'app/app-messages';
 
 @Component({
     selector: 'app-manager',
@@ -16,11 +33,9 @@ import { UpdateManagerComponent } from './update/update-manager.component';
     styleUrls: ['manager.component.css'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: fuseAnimations
+    animations: fuseAnimations,
 })
-
 export class ManagerComponent implements OnInit, AfterViewInit {
-
     @ViewChild(MatPaginator) private _paginator: MatPaginator;
     @ViewChild(MatSort) private _sort: MatSort;
 
@@ -38,7 +53,7 @@ export class ManagerComponent implements OnInit, AfterViewInit {
         private _managerService: ManagerService,
         private _changeDetectorRef: ChangeDetectorRef,
         private _dialog: MatDialog
-    ) { }
+    ) {}
 
     ngOnInit() {
         // Get the products
@@ -48,7 +63,6 @@ export class ManagerComponent implements OnInit, AfterViewInit {
         this._managerService.pagination$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((pagination: ManagerPagination) => {
-
                 // Update the pagination
                 this.pagination = pagination;
 
@@ -61,18 +75,18 @@ export class ManagerComponent implements OnInit, AfterViewInit {
     }
 
     /**
- * After view init
- */
+     * After view init
+     */
     ngAfterViewInit(): void {
         if (this._sort && this._paginator) {
             // Set the initial sort
             this._sort.sort({
                 id: 'name',
                 start: 'asc',
-                disableClear: true
+                disableClear: true,
             });
 
-            this._paginator._intl.itemsPerPageLabel = "Số dòng mỗi trang";
+            this._paginator._intl.itemsPerPageLabel = 'Số dòng mỗi trang';
 
             // Detect changes
             this._changeDetectorRef.detectChanges();
@@ -86,15 +100,23 @@ export class ManagerComponent implements OnInit, AfterViewInit {
                 });
 
             // Get products if sort or page changes
-            merge(this._sort.sortChange, this._paginator.page).pipe(
-                switchMap(() => {
-                    this.isLoading = true;
-                    return this._managerService.getManagers(this._paginator.pageIndex, this._paginator.pageSize, this._sort.active, this._sort.direction, this.searchInputControl.value);
-                }),
-                map(() => {
-                    this.isLoading = false;
-                })
-            ).subscribe();
+            merge(this._sort.sortChange, this._paginator.page)
+                .pipe(
+                    switchMap(() => {
+                        this.isLoading = true;
+                        return this._managerService.getManagers(
+                            this._paginator.pageIndex,
+                            this._paginator.pageSize,
+                            this._sort.active,
+                            this._sort.direction,
+                            this.searchInputControl.value
+                        );
+                    }),
+                    map(() => {
+                        this.isLoading = false;
+                    })
+                )
+                .subscribe();
         }
     }
 
@@ -106,45 +128,77 @@ export class ManagerComponent implements OnInit, AfterViewInit {
                 debounceTime(300),
                 switchMap((query) => {
                     this.isLoading = true;
-                    return this._managerService.getManagers(0, 10, 'name', 'asc', query);
+                    return this._managerService.getManagers(
+                        0,
+                        10,
+                        'name',
+                        'asc',
+                        query
+                    );
                 }),
                 map(() => {
                     this.isLoading = false;
                 })
-            ).subscribe();
+            )
+            .subscribe();
     }
 
     openCreateManagerDialog() {
-        this._dialog.open(CreateManagerComponent, {
-            width: '720px'
-        }).afterClosed().subscribe(result => {
-            // After dialog closed
-            if (result === 'success') {
-                this.showFlashMessage(result, 'Tạo mới thành công', 3000);
-            } else if (result === 'error_duplicate') {
-                this.showFlashMessage('error', 'Tên đăng nhập hoặc số điện thoại đã được sử dụng', 3000);
-            }
-            else {
-                this.showFlashMessage(result, 'Đã có lỗi xảy ra', 3000);
-            }
-        })
+        this._dialog
+            .open(CreateManagerComponent, {
+                width: '720px',
+            })
+            .afterClosed()
+            .subscribe((result) => {
+                // After dialog closed
+                if (result === 'success') {
+                    this.showFlashMessage(
+                        result,
+                        AppMessages.createSuccess,
+                        3000
+                    );
+                } else if (result === 'error_duplicate') {
+                    this.showFlashMessage(
+                        'error',
+                        AppMessages.usernameOrPhoneExist,
+                        3000
+                    );
+                } else {
+                    this.showFlashMessage(result, AppMessages.occurError, 3000);
+                }
+            });
     }
 
     openUpdateManagerDialog(manager: Manager) {
-        this._dialog.open(UpdateManagerComponent, {
-            width: '720px',
-            data: manager
-        }).afterClosed().subscribe(result => {
-            // After dialog closed
-            if (result === 'success') {
-                this.showFlashMessage(result, 'Cập nhật thành công', 3000);
-            } else {
-                this.showFlashMessage('error', 'Đã có lỗi xảy ra', 3000);
-            }
-        })
+        this._dialog
+            .open(UpdateManagerComponent, {
+                width: '720px',
+                data: manager,
+            })
+            .afterClosed()
+            .subscribe((result) => {
+                // After dialog closed
+                if (result === 'success') {
+                    this.showFlashMessage(
+                        result,
+                        AppMessages.updateSuccess,
+                        3000
+                    );
+                } else {
+                    this.showFlashMessage(
+                        'error',
+                        AppMessages.updateError,
+                        3000
+                    );
+                }
+            });
     }
 
-    private showFlashMessage(type: 'success' | 'error', message: string, time: number): void {
+    private showFlashMessage(
+        type: 'success' | 'error',
+        message: string,
+        time: number
+    ): void {
         this.flashMessage = type;
         this.message = message;
         this._changeDetectorRef.markForCheck();
