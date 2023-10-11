@@ -28,8 +28,6 @@ Thư mục "SourceCode" chứa mã nguồn của hệ thống được phân chi
 - **Car-Rental-Mobile-For-Car-Owner**: Chứa mã nguồn của app mobile dành cho chủ xe và tài xế.
 
 - **Car-Rental-Mobile-For-Customer**: Chứa mã nguồn của app mobile dành cho khách hàng.
-
-- **Car-Rental-Mobile-Locate**: Chứa mã nguồn của app mobile dành cho việc định vị.
   
 - **Car-Rental-Web-Admin**: Chứa mã nguồn của web dành cho quản trị viên hệ thống.
   
