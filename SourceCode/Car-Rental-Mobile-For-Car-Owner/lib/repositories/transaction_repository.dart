@@ -1,3 +1,4 @@
+import 'package:car_rental_for_car_owner/commons/constants/app_message.dart';
 import 'package:car_rental_for_car_owner/commons/constants/networks.dart';
 import 'package:car_rental_for_car_owner/commons/extensions.dart';
 import 'package:car_rental_for_car_owner/commons/type.dart';
@@ -77,7 +78,7 @@ class TransactionRepository {
 
       return ApiSuccess(transaction);
     } catch (e) {
-      return const ApiError(error: 'Giao dịch không tồn tại');
+      return const ApiError(error: AppMessages.transactionNotFound);
     }
   }
 }

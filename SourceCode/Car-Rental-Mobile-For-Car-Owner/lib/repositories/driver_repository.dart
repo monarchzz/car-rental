@@ -1,3 +1,4 @@
+import 'package:car_rental_for_car_owner/commons/constants/app_message.dart';
 import 'package:car_rental_for_car_owner/commons/constants/networks.dart';
 import 'package:car_rental_for_car_owner/commons/extensions.dart';
 import 'package:car_rental_for_car_owner/commons/type.dart';
@@ -26,7 +27,7 @@ class DriverRepository {
         );
       }
 
-      return const ApiError(error: 'Lỗi không xác định');
+      return const ApiError(error: AppMessages.unknown);
     } on DioError catch (e) {
       return e.getErrorMessage();
     }

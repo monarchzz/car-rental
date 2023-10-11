@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:car_rental_for_car_owner/commons/constants/app_message.dart';
 import 'package:car_rental_for_car_owner/models/api_response.dart';
 import 'package:car_rental_for_car_owner/models/car.dart';
 import 'package:car_rental_for_car_owner/models/car_owner.dart';
@@ -34,7 +35,7 @@ class CarOwnerDetailBloc
         await carOwnerRepository.carOwnerById(event.carOwnerId);
 
     if (carOwnerResult is ApiError) {
-      emit(const CarOwnerDetailState.failure(message: 'Lỗi không xác định'));
+      emit(const CarOwnerDetailState.failure(message: AppMessages.unknown));
 
       return;
     }

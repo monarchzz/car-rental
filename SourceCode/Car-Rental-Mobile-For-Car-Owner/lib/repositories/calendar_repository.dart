@@ -1,11 +1,10 @@
+import 'package:car_rental_for_car_owner/commons/constants/app_message.dart';
 import 'package:car_rental_for_car_owner/commons/constants/networks.dart';
 import 'package:car_rental_for_car_owner/commons/extensions.dart';
 import 'package:car_rental_for_car_owner/commons/type.dart';
 import 'package:car_rental_for_car_owner/models/api_response.dart';
 import 'package:car_rental_for_car_owner/models/calendar.dart';
-import 'package:car_rental_for_car_owner/models/enums/weekday.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 class CalendarRepository {
   CalendarRepository({
@@ -31,7 +30,7 @@ class CalendarRepository {
         );
       }
 
-      return const ApiError(error: 'Lỗi không xác định');
+      return const ApiError(error: AppMessages.unknown);
     } on DioError catch (e) {
       return e.getErrorMessage();
     }

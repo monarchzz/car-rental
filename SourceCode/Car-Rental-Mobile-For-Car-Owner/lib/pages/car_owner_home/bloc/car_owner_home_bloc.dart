@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:car_rental_for_car_owner/commons/constants/app_message.dart';
 import 'package:car_rental_for_car_owner/models/api_response.dart';
 import 'package:car_rental_for_car_owner/models/car.dart';
 import 'package:car_rental_for_car_owner/models/car_registration.dart';
@@ -40,7 +41,7 @@ class CarOwnerHomeBloc extends Bloc<CarOwnerHomeEvent, CarOwnerHomeState> {
     final carOwner = await userRepository.getCarOwner();
 
     if (carOwner == null) {
-      emit(const CarOwnerHomeState.failure(message: 'Lỗi không xác định'));
+      emit(const CarOwnerHomeState.failure(message: AppMessages.unknown));
       return;
     }
 

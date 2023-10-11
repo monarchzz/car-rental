@@ -1,8 +1,8 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:car_rental_for_car_owner/app/route/route_name.dart';
 import 'package:car_rental_for_car_owner/commons/constants/colors.dart';
+import 'package:car_rental_for_car_owner/commons/constants/app_message.dart';
 import 'package:car_rental_for_car_owner/commons/widgets/app_app_bar.dart';
 import 'package:car_rental_for_car_owner/commons/widgets/message_dialog.dart';
 import 'package:flutter/material.dart';
@@ -108,8 +108,8 @@ class _CarOwnerPaymentWebviewViewState
 
                       if (urlStr.contains('vnpay-return')) {
                         showMessageDialog(
-                          title: 'Nạp tiền thành công',
-                          message: 'Bạn đã nạp tiền thành công',
+                          title: AppMessages.paymentSuccess,
+                          message: AppMessages.paymentSuccessMessage,
                         ).then((value) {
                           context.goNamed(RouteName.carOwnerWallet);
                         });

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:car_rental_for_car_owner/commons/constants/app_message.dart';
 import 'package:car_rental_for_car_owner/models/car_owner.dart';
 import 'package:car_rental_for_car_owner/repositories/user_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -31,7 +32,7 @@ class CarOwnerSettingBloc
     final carOwner = await userRepository.getCarOwner();
 
     if (carOwner == null) {
-      emit(const _Failure(message: 'Không tìm thấy thông tin người dùng'));
+      emit(const _Failure(message: AppMessages.userNotFound));
     }
 
     _carOwner = carOwner;

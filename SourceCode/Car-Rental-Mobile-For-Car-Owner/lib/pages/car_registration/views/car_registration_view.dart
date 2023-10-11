@@ -2,13 +2,13 @@ import 'dart:io';
 
 import 'package:car_rental_for_car_owner/app/route/route_name.dart';
 import 'package:car_rental_for_car_owner/commons/constants/colors.dart';
+import 'package:car_rental_for_car_owner/commons/constants/app_message.dart';
 import 'package:car_rental_for_car_owner/commons/constants/sizes.dart';
 import 'package:car_rental_for_car_owner/commons/extensions.dart';
 import 'package:car_rental_for_car_owner/commons/loading_dialog_service.dart';
 import 'package:car_rental_for_car_owner/commons/widgets/app_app_bar.dart';
 import 'package:car_rental_for_car_owner/commons/widgets/message_dialog.dart';
 import 'package:car_rental_for_car_owner/di.dart';
-import 'package:car_rental_for_car_owner/models/additional_charge.dart';
 import 'package:car_rental_for_car_owner/pages/car_registration/bloc/car_registration_bloc.dart';
 import 'package:car_rental_for_car_owner/pages/car_registration/models/additional_charge_model.dart';
 import 'package:car_rental_for_car_owner/pages/car_registration/models/car_registration_model.dart';
@@ -18,7 +18,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 List<String> carTypes = [
   '4 chỗ (Mini)',
@@ -716,13 +715,13 @@ class _CarRegistrationViewState extends State<CarRegistrationView> {
                                   LoadingDialogService.dispose();
                                   if (resultStr != null) {
                                     showMessageDialog(
-                                      title: 'Thông báo',
+                                      title: AppMessages.notify,
                                       message: resultStr,
                                     );
                                   } else {
                                     showMessageDialog(
-                                      title: 'Thông báo',
-                                      message: 'Tạo phiếu đăng ký thành công',
+                                      title: AppMessages.notify,
+                                      message: AppMessages.createFormSuccess,
                                     ).then((value) {
                                       context.goNamed(RouteName.carOwnerHome);
                                     });

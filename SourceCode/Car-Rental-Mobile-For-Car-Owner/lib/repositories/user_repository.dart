@@ -2,7 +2,6 @@ import 'package:car_rental_for_car_owner/commons/constants/networks.dart';
 import 'package:car_rental_for_car_owner/commons/type.dart';
 import 'package:car_rental_for_car_owner/models/car_owner.dart';
 import 'package:car_rental_for_car_owner/models/driver.dart';
-import 'package:car_rental_for_car_owner/models/enums/gender.dart';
 import 'package:dio/dio.dart';
 
 class UserRepository {

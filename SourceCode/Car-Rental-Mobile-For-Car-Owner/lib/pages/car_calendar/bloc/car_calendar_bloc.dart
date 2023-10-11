@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:car_rental_for_car_owner/commons/constants/app_message.dart';
 import 'package:car_rental_for_car_owner/models/api_response.dart';
 import 'package:car_rental_for_car_owner/models/calendar.dart';
 import 'package:car_rental_for_car_owner/models/enums/weekday.dart';
@@ -37,7 +38,7 @@ class CarCalendarBloc extends Bloc<CarCalendarEvent, CarCalendarState> {
     emit(const _Loading());
 
     if (event.carId == null) {
-      emit(const CarCalendarState.failure(message: 'Lỗi không xác định'));
+      emit(const CarCalendarState.failure(message: AppMessages.unknown));
       return;
     }
 
@@ -47,7 +48,7 @@ class CarCalendarBloc extends Bloc<CarCalendarEvent, CarCalendarState> {
         await calendarRepository.carCalendar(carId: event.carId!);
 
     if (carCalendarResult is ApiError) {
-      emit(const CarCalendarState.failure(message: 'Lỗi không xác định'));
+      emit(const CarCalendarState.failure(message: AppMessages.unknown));
       return;
     }
 

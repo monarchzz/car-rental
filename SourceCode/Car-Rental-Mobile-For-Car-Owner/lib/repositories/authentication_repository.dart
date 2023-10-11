@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:car_rental_for_car_owner/commons/constants/authentication.dart';
+import 'package:car_rental_for_car_owner/commons/constants/app_message.dart';
 import 'package:car_rental_for_car_owner/commons/constants/networks.dart';
 import 'package:car_rental_for_car_owner/commons/extensions.dart';
 import 'package:car_rental_for_car_owner/models/api_response.dart';
@@ -68,7 +69,7 @@ class AuthenticationRepository {
         return const ApiResponse.success(true);
       }
 
-      return const ApiError(error: 'Lỗi không xác định');
+      return const ApiError(error: AppMessages.unknown);
     } on DioError catch (e) {
       return e.getErrorMessage();
     }
@@ -101,7 +102,7 @@ class AuthenticationRepository {
         return const ApiResponse.success(true);
       }
 
-      return const ApiError(error: 'Lỗi không xác định');
+      return const ApiError(error: AppMessages.unknown);
     } on DioError catch (e) {
       return e.getErrorMessage();
     }
@@ -133,7 +134,7 @@ class AuthenticationRepository {
         return await carOwnerLogin(username, password);
       }
 
-      return const ApiError(error: 'Unknown error');
+      return const ApiError(error: AppMessages.unknown);
     } on DioError catch (e) {
       return e.getErrorMessage();
     }

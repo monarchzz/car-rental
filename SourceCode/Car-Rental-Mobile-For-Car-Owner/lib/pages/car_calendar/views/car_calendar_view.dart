@@ -1,4 +1,4 @@
-import 'package:car_rental_for_car_owner/commons/constants/sizes.dart';
+import 'package:car_rental_for_car_owner/commons/constants/app_message.dart';
 import 'package:car_rental_for_car_owner/commons/extensions.dart';
 import 'package:car_rental_for_car_owner/commons/widgets/app_app_bar.dart';
 import 'package:car_rental_for_car_owner/commons/widgets/loading_widget.dart';
@@ -81,9 +81,9 @@ class _CarCalendarViewState extends State<CarCalendarView> {
                                 if (value != null) {
                                   if (value.isAfter(e.endTime)) {
                                     showMessageDialog(
-                                      title: 'Lỗi',
-                                      message:
-                                          'Thời gian bắt đầu không được lớn hơn thời gian kết thúc',
+                                      title: AppMessages.error,
+                                      message: AppMessages
+                                          .startTimeMustBeBeforeEndTime,
                                     );
                                   } else {
                                     context
@@ -111,9 +111,9 @@ class _CarCalendarViewState extends State<CarCalendarView> {
                                 if (value != null) {
                                   if (value.isBefore(e.startTime)) {
                                     showMessageDialog(
-                                      title: 'Lỗi',
-                                      message:
-                                          'Thời gian kết thúc không được nhỏ hơn thời gian bắt đầu',
+                                      title: AppMessages.error,
+                                      message: AppMessages
+                                          .endTimeMustBeAfterStartTime,
                                     );
                                   } else {
                                     context

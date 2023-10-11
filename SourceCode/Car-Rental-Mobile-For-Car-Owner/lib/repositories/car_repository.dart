@@ -1,21 +1,12 @@
+import 'package:car_rental_for_car_owner/commons/constants/app_message.dart';
 import 'package:car_rental_for_car_owner/commons/constants/networks.dart';
 import 'package:car_rental_for_car_owner/commons/extensions.dart';
 import 'package:car_rental_for_car_owner/commons/type.dart';
-import 'package:car_rental_for_car_owner/models/additional_charge.dart';
 import 'package:car_rental_for_car_owner/models/api_response.dart';
 import 'package:car_rental_for_car_owner/models/car.dart';
-import 'package:car_rental_for_car_owner/models/car_feature.dart';
-import 'package:car_rental_for_car_owner/models/car_model.dart';
-import 'package:car_rental_for_car_owner/models/car_owner.dart';
-import 'package:car_rental_for_car_owner/models/car_type.dart';
-import 'package:car_rental_for_car_owner/models/feature.dart';
-import 'package:car_rental_for_car_owner/models/location.dart';
 import 'package:car_rental_for_car_owner/models/pagination_result.dart';
-import 'package:car_rental_for_car_owner/models/production_company.dart';
-import 'package:car_rental_for_car_owner/models/type_model.dart';
 import 'package:car_rental_for_car_owner/repositories/models/update_car_model.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 class CarRepository {
   CarRepository({
@@ -51,7 +42,7 @@ class CarRepository {
         return ApiSuccess(cars);
       }
 
-      return const ApiError(error: 'Lỗi không xác định');
+      return const ApiError(error: AppMessages.unknown);
     } on DioError catch (e) {
       return e.getErrorMessage();
     }
@@ -69,7 +60,7 @@ class CarRepository {
         );
       }
 
-      return const ApiError(error: 'Lỗi không xác định');
+      return const ApiError(error: AppMessages.unknown);
     } on DioError catch (e) {
       return e.getErrorMessage();
     }
@@ -92,7 +83,7 @@ class CarRepository {
         );
       }
 
-      return const ApiError(error: 'Lỗi không xác định');
+      return const ApiError(error: AppMessages.unknown);
     } on DioError catch (e) {
       return e.getErrorMessage();
     }
@@ -125,7 +116,7 @@ class CarRepository {
         return ApiSuccess(cars);
       }
 
-      return const ApiError(error: 'Lỗi không xác định');
+      return const ApiError(error: AppMessages.unknown);
     } on DioError catch (e) {
       return e.getErrorMessage();
     }

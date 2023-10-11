@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:car_rental_for_car_owner/commons/constants/app_message.dart';
 import 'package:car_rental_for_car_owner/commons/loading_dialog_service.dart';
 import 'package:car_rental_for_car_owner/commons/widgets/message_dialog.dart';
 import 'package:car_rental_for_car_owner/models/api_response.dart';
@@ -53,7 +54,7 @@ class DriverProfileDetailBloc
     }
 
     if (result is ApiSuccess) {
-      showMessageDialog(message: 'Cập nhập thành công');
+      showMessageDialog(message: AppMessages.updateSuccess);
     }
   }
 }

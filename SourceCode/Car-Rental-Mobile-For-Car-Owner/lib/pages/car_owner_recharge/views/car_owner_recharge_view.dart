@@ -1,4 +1,5 @@
 import 'package:car_rental_for_car_owner/app/route/route_name.dart';
+import 'package:car_rental_for_car_owner/commons/constants/app_message.dart';
 import 'package:car_rental_for_car_owner/commons/constants/sizes.dart';
 import 'package:car_rental_for_car_owner/commons/extensions.dart';
 import 'package:car_rental_for_car_owner/commons/loading_dialog_service.dart';
@@ -104,8 +105,8 @@ class _CarOwnerRechargeViewState extends State<CarOwnerRechargeView> {
                                 );
                               } else {
                                 showMessageDialog(
-                                  title: 'Lỗi',
-                                  message: 'Có lỗi xảy ra, vui lòng thử lại',
+                                  title: AppMessages.error,
+                                  message: AppMessages.occurredErrorMessage,
                                 );
                               }
                             }

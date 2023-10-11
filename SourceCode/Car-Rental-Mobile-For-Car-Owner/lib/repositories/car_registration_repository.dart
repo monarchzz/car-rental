@@ -1,9 +1,9 @@
+import 'package:car_rental_for_car_owner/commons/constants/app_message.dart';
 import 'package:car_rental_for_car_owner/commons/constants/networks.dart';
 import 'package:car_rental_for_car_owner/commons/extensions.dart';
 import 'package:car_rental_for_car_owner/commons/type.dart';
 import 'package:car_rental_for_car_owner/models/api_response.dart';
 import 'package:car_rental_for_car_owner/models/car_registration.dart';
-import 'package:car_rental_for_car_owner/models/pagination.dart';
 import 'package:car_rental_for_car_owner/models/pagination_result.dart';
 import 'package:car_rental_for_car_owner/pages/car_registration/models/car_registration_model.dart';
 import 'package:dio/dio.dart';
@@ -80,7 +80,7 @@ class CarRegistrationRepository {
         return null;
       }
 
-      return 'Lỗi không xác định';
+      return AppMessages.unknown;
     } on DioError catch (e) {
       return e.toString();
     }
@@ -138,7 +138,7 @@ class CarRegistrationRepository {
       }
 
       return const ApiError(
-        error: 'Lỗi không xác định',
+        error: AppMessages.unknown,
       );
     } on DioError catch (e) {
       return e.getErrorMessage();

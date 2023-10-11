@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:car_rental_for_car_owner/commons/constants/app_message.dart';
 import 'package:car_rental_for_car_owner/commons/loading_dialog_service.dart';
 import 'package:car_rental_for_car_owner/commons/widgets/message_dialog.dart';
 import 'package:car_rental_for_car_owner/models/api_response.dart';
@@ -32,7 +33,7 @@ class CarOwnerOrderDetailBloc
     emit(const _Loading());
 
     if (event.order == null) {
-      emit(const _Failure(message: 'Lỗi không xác định'));
+      emit(const _Failure(message: AppMessages.unknown));
       return;
     }
 
@@ -41,7 +42,7 @@ class CarOwnerOrderDetailBloc
     );
 
     if (orderResult is ApiError) {
-      emit(const _Failure(message: 'Lỗi không xác định'));
+      emit(const _Failure(message: AppMessages.unknown));
       return;
     }
 
@@ -64,7 +65,8 @@ class CarOwnerOrderDetailBloc
     LoadingDialogService.dispose();
 
     if (orderResult == false) {
-      showMessageDialog(title: 'Lỗi', message: 'Cập nhật trạng thái thất bại');
+      showMessageDialog(
+          title: AppMessages.error, message: AppMessages.updateStatusFailed);
     }
 
     add(_Started(order: (state as _Success).order));
@@ -85,7 +87,8 @@ class CarOwnerOrderDetailBloc
     LoadingDialogService.dispose();
 
     if (orderResult == false) {
-      showMessageDialog(title: 'Lỗi', message: 'Cập nhật trạng thái thất bại');
+      showMessageDialog(
+          title: AppMessages.error, message: AppMessages.updateStatusFailed);
     }
 
     add(_Started(order: (state as _Success).order));

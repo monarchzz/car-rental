@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:car_rental_for_car_owner/commons/constants/app_message.dart';
 import 'package:car_rental_for_car_owner/commons/loading_dialog_service.dart';
 import 'package:car_rental_for_car_owner/models/api_response.dart';
 import 'package:car_rental_for_car_owner/models/car.dart';
@@ -30,7 +31,8 @@ class CarOwnerCarDetailBloc
     Emitter<CarOwnerCarDetailState> emit,
   ) async {
     if (event.carId == null) {
-      emit(const CarOwnerCarDetailState.failure(message: 'Xe không tồn tại'));
+      emit(const CarOwnerCarDetailState.failure(
+          message: AppMessages.carNotFound));
       return;
     }
 
@@ -39,7 +41,8 @@ class CarOwnerCarDetailBloc
     final carResult = await carRepository.carById(event.carId!);
 
     if (carResult is ApiError) {
-      emit(const CarOwnerCarDetailState.failure(message: 'Xe không tồn tại'));
+      emit(const CarOwnerCarDetailState.failure(
+          message: AppMessages.carNotFound));
       return;
     }
 

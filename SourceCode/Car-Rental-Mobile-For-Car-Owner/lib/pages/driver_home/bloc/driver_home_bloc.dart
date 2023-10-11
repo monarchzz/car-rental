@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:car_rental_for_car_owner/commons/constants/app_message.dart';
 import 'package:car_rental_for_car_owner/models/api_response.dart';
 import 'package:car_rental_for_car_owner/models/order.dart';
 import 'package:car_rental_for_car_owner/repositories/order_repository.dart';
@@ -29,7 +30,7 @@ class DriverHomeBloc extends Bloc<DriverHomeEvent, DriverHomeState> {
     final calendarOrdersResult = await orderRepository.calendarOrders();
 
     if (currentOrderResult is ApiError || calendarOrdersResult is ApiError) {
-      emit(const _Failure(message: 'Something went wrong'));
+      emit(const _Failure(message: AppMessages.occurredErrorMessage));
       return;
     }
 
