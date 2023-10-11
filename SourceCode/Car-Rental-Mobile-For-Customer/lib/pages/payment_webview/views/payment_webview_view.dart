@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:car_rental_for_customer/app/route/route_name.dart';
+import 'package:car_rental_for_customer/commons/constants/app_message.dart';
 import 'package:car_rental_for_customer/commons/constants/colors.dart';
 import 'package:car_rental_for_customer/commons/widgets/app_app_bar.dart';
 import 'package:car_rental_for_customer/commons/widgets/message_dialog.dart';
@@ -112,8 +113,8 @@ class _PaymentWebviewViewState extends State<PaymentWebviewView> {
 
                       if (urlStr.contains('vnpay-return')) {
                         showMessageDialog(
-                          title: 'Nạp tiền thành công',
-                          message: 'Bạn đã nạp tiền thành công',
+                          title: AppMessages.paymentSuccess,
+                          message: AppMessages.paymentSuccessMessage,
                         ).then((value) {
                           context.goNamed(RouteName.wallet);
                         });

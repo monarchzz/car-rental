@@ -1,3 +1,4 @@
+import 'package:car_rental_for_customer/commons/constants/app_message.dart';
 import 'package:car_rental_for_customer/commons/constants/networks.dart';
 import 'package:car_rental_for_customer/commons/extensions.dart';
 import 'package:car_rental_for_customer/commons/type.dart';
@@ -91,7 +92,7 @@ class CarRepository {
         );
       }
 
-      return const ApiError(error: 'Lỗi không xác định');
+      return const ApiError(error: AppMessages.unknown);
     } on DioError catch (e) {
       return e.getErrorMessage();
     }
@@ -109,7 +110,7 @@ class CarRepository {
         );
       }
 
-      return const ApiError(error: 'Lỗi không xác định');
+      return const ApiError(error: AppMessages.unknown);
     } on DioError catch (e) {
       return e.getErrorMessage();
     }
@@ -142,7 +143,7 @@ class CarRepository {
         return ApiSuccess(cars);
       }
 
-      return const ApiError(error: 'Lỗi không xác định');
+      return const ApiError(error: AppMessages.unknown);
     } on DioError catch (e) {
       return e.getErrorMessage();
     }

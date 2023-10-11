@@ -1,3 +1,4 @@
+import 'package:car_rental_for_customer/commons/constants/app_message.dart';
 import 'package:car_rental_for_customer/commons/constants/networks.dart';
 import 'package:car_rental_for_customer/commons/extensions.dart';
 import 'package:car_rental_for_customer/commons/type.dart';
@@ -48,7 +49,7 @@ class UserRepository {
         return const ApiResponse.success(null);
       }
 
-      return const ApiResponse.error(error: 'unknown error');
+      return const ApiResponse.error(error: AppMessages.unknown);
     } on DioError catch (e) {
       return e.getErrorMessage();
     }
@@ -80,7 +81,7 @@ class UserRepository {
         return const ApiResponse.success(null);
       }
 
-      return const ApiResponse.error(error: 'Lỗi không xác định');
+      return const ApiResponse.error(error: AppMessages.unknown);
     } on DioError catch (e) {
       return e.getErrorMessage();
     }

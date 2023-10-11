@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:car_rental_for_customer/commons/constants/app_message.dart';
 import 'package:car_rental_for_customer/commons/loading_dialog_service.dart';
 import 'package:car_rental_for_customer/commons/widgets/message_dialog.dart';
 import 'package:car_rental_for_customer/models/api_response.dart';
@@ -33,7 +34,8 @@ class OrderInformationBloc
     emit(const OrderInformationState.loading());
 
     if (event.orderId == null) {
-      emit(const OrderInformationState.failure(message: 'Order id is null'));
+      emit(const OrderInformationState.failure(
+          message: AppMessages.orderNotFound));
       return;
     }
 
@@ -78,13 +80,14 @@ class OrderInformationBloc
     LoadingDialogService.dispose();
 
     if (orderResult == false && event.status != OrderStatus.paid) {
-      showMessageDialog(title: 'Lỗi', message: 'Cập nhật trạng thái thất bại');
+      showMessageDialog(
+          title: AppMessages.error, message: AppMessages.updateStatusFailed);
     }
 
     if (orderResult == false && event.status == OrderStatus.paid) {
       showMessageDialog(
-        title: 'Lỗi',
-        message: 'Bạn không đủ tiền để thanh toán',
+        title: AppMessages.error,
+        message: AppMessages.notEnoughMoney,
       );
     }
 
@@ -110,7 +113,8 @@ class OrderInformationBloc
     LoadingDialogService.dispose();
 
     if (orderResult == false) {
-      showMessageDialog(title: 'Lỗi', message: 'Cập nhật trạng thái thất bại');
+      showMessageDialog(
+          title: AppMessages.error, message: AppMessages.updateStatusFailed);
     }
 
     add(_Started(orderId: currentState.order.id));

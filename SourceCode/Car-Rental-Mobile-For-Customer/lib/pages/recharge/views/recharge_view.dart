@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:car_rental_for_customer/app/route/route_name.dart';
+import 'package:car_rental_for_customer/commons/constants/app_message.dart';
 import 'package:car_rental_for_customer/commons/constants/sizes.dart';
 import 'package:car_rental_for_customer/commons/extensions.dart';
 import 'package:car_rental_for_customer/commons/loading_dialog_service.dart';
@@ -106,8 +107,8 @@ class _RechargeViewState extends State<RechargeView> {
                                 );
                               } else {
                                 showMessageDialog(
-                                  title: 'Lỗi',
-                                  message: 'Có lỗi xảy ra, vui lòng thử lại',
+                                  title: AppMessages.error,
+                                  message: AppMessages.occurredErrorMessage,
                                 );
                               }
                             }

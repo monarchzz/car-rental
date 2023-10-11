@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:car_rental_for_customer/app/bloc/authentication_bloc.dart';
 import 'package:car_rental_for_customer/app/route/route_name.dart';
+import 'package:car_rental_for_customer/commons/constants/app_message.dart';
 import 'package:car_rental_for_customer/commons/constants/colors.dart';
 import 'package:car_rental_for_customer/commons/constants/images.dart';
 import 'package:car_rental_for_customer/commons/constants/sizes.dart';
@@ -135,9 +136,8 @@ class _CarDetailViewState extends State<CarDetailView> {
                                   if (isLicenseValid == false &&
                                       value == false) {
                                     showMessageDialog(
-                                      title: 'Thông báo',
-                                      message:
-                                          'Bạn phải cập nhật giấy phép lái xe mới có thể thuê xe không tài xế',
+                                      title: AppMessages.notify,
+                                      message: AppMessages.updateDriverLicense,
                                     );
                                   } else {
                                     setState(() {

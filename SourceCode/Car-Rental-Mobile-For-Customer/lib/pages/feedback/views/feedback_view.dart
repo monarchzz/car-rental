@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:car_rental_for_customer/app/route/route_name.dart';
+import 'package:car_rental_for_customer/commons/constants/app_message.dart';
 import 'package:car_rental_for_customer/commons/constants/colors.dart';
 import 'package:car_rental_for_customer/commons/constants/images.dart';
 import 'package:car_rental_for_customer/commons/constants/sizes.dart';
@@ -380,15 +381,15 @@ class _FeedbackViewState extends State<FeedbackView> {
 
                               if (result.any((element) => element == true)) {
                                 showMessageDialog(
-                                  title: 'Thành công',
-                                  message: 'Cảm ơn bạn đã đánh giá',
+                                  title: AppMessages.success,
+                                  message: AppMessages.thankYouForYourFeedback,
                                 ).then((value) {
                                   context.goNamed(RouteName.activity);
                                 });
                               } else {
                                 showMessageDialog(
-                                  title: 'Thất bại',
-                                  message: 'Đã có lỗi xảy ra',
+                                  title: AppMessages.failed,
+                                  message: AppMessages.occurredErrorMessage,
                                 );
                               }
                             },

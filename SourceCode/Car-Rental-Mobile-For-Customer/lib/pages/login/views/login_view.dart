@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:car_rental_for_customer/app/route/route_name.dart';
+import 'package:car_rental_for_customer/commons/constants/app_message.dart';
 import 'package:car_rental_for_customer/commons/constants/colors.dart';
 import 'package:car_rental_for_customer/commons/constants/images.dart';
 import 'package:car_rental_for_customer/commons/constants/sizes.dart';
@@ -235,7 +236,7 @@ class _LoginViewState extends State<LoginView> {
       if (result is ApiError) {
         // var message = (result as ApiError).error;t
         // showMessageDialog(message: message);
-        showMessageDialog(message: 'Tên đăng nhập hoặc mật khẩu không đúng');
+        showMessageDialog(message: AppMessages.usernameOrPasswordIncorrect);
       }
     }
   }

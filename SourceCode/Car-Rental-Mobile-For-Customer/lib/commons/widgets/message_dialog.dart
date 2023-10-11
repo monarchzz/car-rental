@@ -1,4 +1,5 @@
 import 'package:car_rental_for_customer/app/route/app_route.dart';
+import 'package:car_rental_for_customer/commons/constants/app_message.dart';
 import 'package:car_rental_for_customer/commons/constants/colors.dart';
 import 'package:car_rental_for_customer/di.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ Future<dynamic> showMessageDialog({
     builder: (context) {
       return AlertDialog(
         title: Text(
-          title ?? 'Thông báo',
+          title ?? AppMessages.notify,
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w500,

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:car_rental_for_customer/commons/constants/app_message.dart';
 import 'package:car_rental_for_customer/commons/constants/networks.dart';
 import 'package:car_rental_for_customer/commons/extensions.dart';
 import 'package:car_rental_for_customer/commons/type.dart';
@@ -37,7 +38,7 @@ class MapsRepository {
         );
       }
 
-      return const ApiResponse.error(error: 'unknown error');
+      return const ApiResponse.error(error: AppMessages.unknown);
     } on DioError catch (e) {
       return e.getErrorMessage();
     }
@@ -73,7 +74,7 @@ class MapsRepository {
         return ApiResponse.success(place);
       }
 
-      return const ApiResponse.error(error: 'unknown error');
+      return const ApiResponse.error(error: AppMessages.unknown);
     } on DioError catch (e) {
       return e.getErrorMessage();
     }
@@ -110,7 +111,7 @@ class MapsRepository {
         );
       }
 
-      return const ApiResponse.error(error: 'unknown error');
+      return const ApiResponse.error(error: AppMessages.unknown);
     } on DioError catch (e) {
       return e.getErrorMessage();
     }

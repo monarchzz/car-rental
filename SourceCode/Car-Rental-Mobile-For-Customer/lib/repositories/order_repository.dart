@@ -1,3 +1,4 @@
+import 'package:car_rental_for_customer/commons/constants/app_message.dart';
 import 'package:car_rental_for_customer/commons/constants/networks.dart';
 import 'package:car_rental_for_customer/commons/extensions.dart';
 import 'package:car_rental_for_customer/commons/type.dart';
@@ -74,7 +75,7 @@ class OrderRepository {
       }
 
       return const ApiError(
-        error: 'Không tìm thấy đơn hàng',
+        error: AppMessages.orderNotFound,
       );
     } on DioError catch (e) {
       return e.getErrorMessage();
@@ -94,22 +95,22 @@ class OrderRepository {
       }
 
       return const ApiResponse.error(
-        error: 'Xảy ra lỗi trong quá trình đặt xe',
+        error: AppMessages.occurredErrorWhenCreateOrder,
       );
     } on DioError catch (e) {
       if (e.response?.statusCode == StatusCodes.status409Conflict) {
         return const ApiResponse.error(
-          error: 'Bạn có đơn hàng đang chờ duyệt',
+          error: AppMessages.orderIsPending,
         );
       }
       if (e.response?.statusCode == StatusCodes.status402PaymentRequired) {
         return const ApiResponse.error(
-          error: 'Bạn không đủ tiền để đặt xe',
+          error: AppMessages.notEnoughMoney,
         );
       }
 
       return const ApiResponse.error(
-        error: 'Xảy ra lỗi trong quá trình đặt xe',
+        error: AppMessages.occurredErrorWhenCreateOrder,
       );
     }
   }

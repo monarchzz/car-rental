@@ -1,8 +1,5 @@
 import 'package:car_rental_for_customer/commons/constants/networks.dart';
-import 'package:car_rental_for_customer/commons/extensions.dart';
 import 'package:car_rental_for_customer/commons/type.dart';
-import 'package:car_rental_for_customer/models/api_response.dart';
-import 'package:car_rental_for_customer/models/car.dart';
 import 'package:car_rental_for_customer/models/customer.dart';
 import 'package:dio/dio.dart';
 

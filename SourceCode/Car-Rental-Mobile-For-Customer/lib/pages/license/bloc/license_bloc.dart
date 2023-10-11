@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:car_rental_for_customer/commons/constants/app_message.dart';
 import 'package:car_rental_for_customer/commons/loading_dialog_service.dart';
 import 'package:car_rental_for_customer/commons/widgets/message_dialog.dart';
 import 'package:car_rental_for_customer/models/api_response.dart';
@@ -35,7 +36,7 @@ class LicenseBloc extends Bloc<LicenseEvent, LicenseState> {
     if (user != null) {
       emit(LicenseState.success(user: user));
     } else {
-      emit(const LicenseState.failure(message: 'Lỗi không xác định'));
+      emit(const LicenseState.failure(message: AppMessages.unknown));
     }
   }
 
@@ -56,7 +57,7 @@ class LicenseBloc extends Bloc<LicenseEvent, LicenseState> {
     }
 
     if (result is ApiSuccess) {
-      showMessageDialog(message: 'Cập nhập thành công');
+      showMessageDialog(message: AppMessages.updateSuccess);
       add(const _Started());
     }
   }

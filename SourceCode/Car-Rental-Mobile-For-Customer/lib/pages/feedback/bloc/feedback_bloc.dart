@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:car_rental_for_customer/commons/constants/app_message.dart';
 import 'package:car_rental_for_customer/models/api_response.dart';
 import 'package:car_rental_for_customer/models/enums/feedback_type.dart';
 import 'package:car_rental_for_customer/models/feedback.dart';
@@ -60,7 +61,7 @@ class FeedbackBloc extends Bloc<FeedbackEvent, FeedbackState> {
     final orderResult =
         await orderRepository.getOrderById(id: event.orderId ?? '');
     if (orderResult is ApiError) {
-      emit(const _Failure(message: 'Không tìm thấy đơn hàng'));
+      emit(const _Failure(message: AppMessages.orderNotFound));
       return;
     }
 

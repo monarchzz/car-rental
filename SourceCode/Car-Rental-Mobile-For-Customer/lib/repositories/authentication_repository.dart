@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:car_rental_for_customer/commons/constants/app_message.dart';
 import 'package:car_rental_for_customer/commons/constants/authentication.dart';
 import 'package:car_rental_for_customer/commons/constants/networks.dart';
 import 'package:car_rental_for_customer/commons/extensions.dart';
@@ -60,7 +61,7 @@ class AuthenticationRepository {
         return const ApiResponse.success(true);
       }
 
-      return const ApiError(error: 'Unknown error');
+      return const ApiError(error: AppMessages.unknown);
     } on DioError catch (e) {
       return e.getErrorMessage();
     }
@@ -92,7 +93,7 @@ class AuthenticationRepository {
         return await login(username, password);
       }
 
-      return const ApiError(error: 'Unknown error');
+      return const ApiError(error: AppMessages.unknown);
     } on DioError catch (e) {
       return e.getErrorMessage();
     }

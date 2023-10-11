@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:car_rental_for_customer/app/route/app_route.dart';
 import 'package:car_rental_for_customer/app/route/route_name.dart';
+import 'package:car_rental_for_customer/commons/constants/app_message.dart';
 import 'package:car_rental_for_customer/commons/loading_dialog_service.dart';
 import 'package:car_rental_for_customer/commons/widgets/message_dialog.dart';
 import 'package:car_rental_for_customer/di.dart';
@@ -53,7 +54,8 @@ class CarBookingConfirmationBloc
         event.endDate == null ||
         event.latitude == null ||
         event.longitude == null) {
-      emit(const CarBookingConfirmationState.failure(message: 'Missing data'));
+      emit(const CarBookingConfirmationState.failure(
+          message: AppMessages.missingRequiredField));
       return;
     }
 
@@ -117,7 +119,7 @@ class CarBookingConfirmationBloc
     if (result is ApiError) {
       String message = (result as ApiError).error ?? '';
       showMessageDialog(
-        title: 'Lỗi',
+        title: AppMessages.error,
         message: message,
       );
       return;
