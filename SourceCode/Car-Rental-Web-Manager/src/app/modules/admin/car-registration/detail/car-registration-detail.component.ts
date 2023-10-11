@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+    ViewEncapsulation,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { fuseAnimations } from '@fuse/animations';
@@ -10,17 +16,16 @@ import { CreateCarComponent } from '../create-car/create-car.component';
 import { CarInformationComponent } from './car-information/car-information.component';
 import { Image } from 'app/modules/types/image.type';
 import { DenyCarRegistrationComponent } from './deny-car-registration/deny-car-registration.component';
+import AppMessages from 'app/app-messages';
 
 @Component({
     selector: 'app-car-registration-detail',
     templateUrl: 'car-registration-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: fuseAnimations
+    animations: fuseAnimations,
 })
-
 export class CarRegistrationDetailComponent implements OnInit {
-
     selectedImage: Image;
     carRegistration: CarRegistration;
 
@@ -35,15 +40,14 @@ export class CarRegistrationDetailComponent implements OnInit {
         private _carRegistrationService: CarRegistrationService,
         private _changeDetectorRef: ChangeDetectorRef,
         private _dialog: MatDialog,
-        private _modelService: ModelService,
-    ) { }
+        private _modelService: ModelService
+    ) {}
 
     ngOnInit() {
         // Subscribe value of car registration in service
         this._carRegistrationService.carRegistration$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(carRegistration => {
-
+            .subscribe((carRegistration) => {
                 console.log(carRegistration);
 
                 // Update the car registration
@@ -52,52 +56,87 @@ export class CarRegistrationDetailComponent implements OnInit {
 
                 // Mark for check
                 this._changeDetectorRef.markForCheck();
-            })
+            });
     }
 
     private initialCarCalendar(carRegistration: CarRegistration) {
-        const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        const allDays = weekdays.map(day => ({
+        const weekdays = [
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday',
+            'Sunday',
+        ];
+        const allDays = weekdays.map((day) => ({
             weekday: day,
             startTime: null,
             endTime: null,
-            ...carRegistration.calendars.map(c => c.calendar).find(c => c.weekday === day)
+            ...carRegistration.calendars
+                .map((c) => c.calendar)
+                .find((c) => c.weekday === day),
         }));
         this.dataSource = new MatTableDataSource(allDays);
     }
 
     openCreateCarDialog() {
-        this._modelService.getModels().pipe(take(1)).subscribe(response => {
-            this._dialog.open(CreateCarComponent, {
-                width: '1080px',
-                data: {
-                    carRegistration: this.carRegistration,
-                    models: response.data
-                },
-                autoFocus: false
-            }).afterClosed().subscribe(result => {
-                // After dialog closed
-                if (result === 'success') {
-                    this.showFlashMessage(result, 'Phê duyệt nhật thành công', 3000);
-                } else if (result === 'error_duplicate') {
-                    this.showFlashMessage('error', 'Biển số xe này đã có người đăng ký', 3000);
-                } else if (result) {
-                    this.showFlashMessage('error', 'Đã có lỗi khôn mong muống vui lòng liên hệ bộ phận hổ trợ', 3000);
-                }
-            })
-        })
+        this._modelService
+            .getModels()
+            .pipe(take(1))
+            .subscribe((response) => {
+                this._dialog
+                    .open(CreateCarComponent, {
+                        width: '1080px',
+                        data: {
+                            carRegistration: this.carRegistration,
+                            models: response.data,
+                        },
+                        autoFocus: false,
+                    })
+                    .afterClosed()
+                    .subscribe((result) => {
+                        // After dialog closed
+                        if (result === 'success') {
+                            this.showFlashMessage(
+                                result,
+                                AppMessages.acceptSuccess,
+                                3000
+                            );
+                        } else if (result === 'error_duplicate') {
+                            this.showFlashMessage(
+                                'error',
+                                AppMessages.licensePlateExist,
+                                3000
+                            );
+                        } else if (result) {
+                            this.showFlashMessage(
+                                'error',
+                                AppMessages.occurErrorPleaseContactSupport,
+                                3000
+                            );
+                        }
+                    });
+            });
     }
 
     openDenyCarRegistrationDialog() {
-        this._dialog.open(DenyCarRegistrationComponent, {
-            width: '720px',
-            data: this.carRegistration
-        }).afterClosed().subscribe(() => {
-            this._changeDetectorRef.markForCheck();
-        });
+        this._dialog
+            .open(DenyCarRegistrationComponent, {
+                width: '720px',
+                data: this.carRegistration,
+            })
+            .afterClosed()
+            .subscribe(() => {
+                this._changeDetectorRef.markForCheck();
+            });
     }
 
-    private showFlashMessage(type: 'success' | 'error', message: string, time: number): void {
+    private showFlashMessage(
+        type: 'success' | 'error',
+        message: string,
+        time: number
+    ): void {
         this.flashMessage = type;
         this.message = message;
         this._changeDetectorRef.markForCheck();
@@ -110,12 +149,11 @@ export class CarRegistrationDetailComponent implements OnInit {
     openCarInformationDialog() {
         this._dialog.open(CarInformationComponent, {
             width: '1080px',
-            data: this.carRegistration
-        })
+            data: this.carRegistration,
+        });
     }
 
     selectImage(image: Image) {
         this.selectedImage = image;
     }
-
 }
