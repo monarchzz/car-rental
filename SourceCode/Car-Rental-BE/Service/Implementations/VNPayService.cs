@@ -37,12 +37,8 @@ public class VNPayService : BaseService, IVNPayService
 
     public async Task<bool> AddResponse(VnPayResponseModel model)
     {
-
-        if (model.TransactionStatus != "00")
-            return false;
-
         var transaction = await _transactionRepository.GetMany(transaction => transaction.Id.Equals(model.TxnRef)).FirstOrDefaultAsync();
-        if (transaction != null)
+        if (transaction != null && model.TransactionStatus == "00")
         {
             var customer = await _customerRepository.GetMany(customer => customer.AccountId.Equals(transaction.CustomerId))
                 .Include(customer => customer.Wallet).FirstOrDefaultAsync();
@@ -50,7 +46,22 @@ public class VNPayService : BaseService, IVNPayService
             transaction.Status = "Thành công";
             _customerRepository.Update(customer);
             _transactionRepository.Update(transaction);
+
+            await _unitOfWork.SaveChanges();
+
+            return true;
+
         }
-        return await _unitOfWork.SaveChanges() > 0;
+        else if (transaction != null)
+        {
+            transaction.Status = "Thất bại";
+            _transactionRepository.Update(transaction);
+
+            await _unitOfWork.SaveChanges();
+
+            return false;
+        }
+
+        return false;
     }
 }
