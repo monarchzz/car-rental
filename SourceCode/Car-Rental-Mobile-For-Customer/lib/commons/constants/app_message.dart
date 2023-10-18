@@ -30,4 +30,6 @@ mixin AppMessages {
   static const String thankYouForYourFeedback = 'Cảm ơn bạn đã gửi phản hồi';
   static const String updateDriverLicense =
       'Bạn phải cập nhật giấy phép lái xe mới có thể thuê xe không tài xế';
+  static const String paymentFailed = 'Nạp tiền thất bại';
+  static const String paymentFailedMessage = 'Bạn đã nạp tiền thất bại';
 }

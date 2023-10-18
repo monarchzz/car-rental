@@ -112,12 +112,21 @@ class _PaymentWebviewViewState extends State<PaymentWebviewView> {
                       final urlStr = url?.toString() ?? '';
 
                       if (urlStr.contains('vnpay-return')) {
-                        showMessageDialog(
-                          title: AppMessages.paymentSuccess,
-                          message: AppMessages.paymentSuccessMessage,
-                        ).then((value) {
-                          context.goNamed(RouteName.wallet);
-                        });
+                        if (urlStr.contains('vnp_TransactionStatus=00')) {
+                          showMessageDialog(
+                            title: AppMessages.paymentSuccess,
+                            message: AppMessages.paymentSuccessMessage,
+                          ).then((value) {
+                            context.goNamed(RouteName.wallet);
+                          });
+                        } else {
+                          showMessageDialog(
+                            title: AppMessages.paymentFailed,
+                            message: AppMessages.paymentFailedMessage,
+                          ).then((value) {
+                            context.goNamed(RouteName.wallet);
+                          });
+                        }
                       }
                     },
                     onLoadError: (controller, url, code, message) {
