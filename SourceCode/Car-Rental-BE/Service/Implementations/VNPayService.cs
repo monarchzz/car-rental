@@ -37,6 +37,10 @@ public class VNPayService : BaseService, IVNPayService
 
     public async Task<bool> AddResponse(VnPayResponseModel model)
     {
+
+        if (model.TransactionStatus != "00")
+            return false;
+
         var transaction = await _transactionRepository.GetMany(transaction => transaction.Id.Equals(model.TxnRef)).FirstOrDefaultAsync();
         if (transaction != null)
         {
