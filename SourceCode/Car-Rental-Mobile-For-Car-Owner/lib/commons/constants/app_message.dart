@@ -20,4 +20,33 @@ mixin AppMessages {
       'Tên đăng nhập hoặc mật khẩu không chính xác';
   static const String carNotFound = 'Không tìm thấy xe';
   static const String userNotFound = 'Không tìm thấy người dùng';
+  // message for Vui lòng nhập hãng xe
+  static const String pleaseEnterCarBrand = 'Vui lòng nhập hãng xe';
+  // message for Vui lòng nhập tên xe
+  static const String pleaseEnterCarName = 'Vui lòng nhập tên xe';
+  // message for Vui lòng nhập biển số xe
+  static const String pleaseEnterCarLicensePlate = 'Vui lòng nhập biển số xe';
+  // message for Biển số xe không hợp lệ
+  static const String invalidCarLicensePlate = 'Biển số xe không hợp lệ';
+  // message for Vui long nhập nắm sản xuất
+  static const String pleaseEnterCarYearOfManufacture =
+      'Vui lòng nhập năm sản xuất';
+  // message for Vui lòng nhập số chỗ ngồi
+  static const String pleaseEnterCarNumberOfSeats = 'Vui lòng nhập số chỗ ngồi';
+  // message for Vui lòng nhập mức tiêu thụ xăng dầu
+  static const String pleaseEnterCarFuelConsumption =
+      'Vui lòng nhập mức tiêu thụ xăng dầu';
+  // message for Vui long nhập vị trí
+  static const String pleaseEnterCarLocation = 'Vui lòng nhập vị trí';
+  // message for Vui lòng nhập giá thuê
+  static const String pleaseEnterCarPrice = 'Vui lòng nhập giá thuê';
+  // message for Vui lòng nhập giới hạn quãng đường
+  static const String pleaseEnterCarLimitDistance =
+      'Vui lòng nhập giới hạn quãng đường';
+  // message for Vui lòng nhập phụ phí vượt quãng đường
+  static const String pleaseEnterCarOverLimitDistanceFee =
+      'Vui lòng nhập phụ phí vượt quãng đường';
+  // message for Vui lòng nhập phụ phí vượt quá giờ
+  static const String pleaseEnterCarOverTimeFee =
+      'Vui lòng nhập phụ phí vượt quá giờ';
 }

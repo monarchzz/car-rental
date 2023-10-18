@@ -132,7 +132,7 @@ class _CarRegistrationViewState extends State<CarRegistrationView> {
                             hintText: 'Ví dụ: Honda',
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Vui lòng nhập hãng xe';
+                                return AppMessages.pleaseEnterCarBrand;
                               }
                               return null;
                             },
@@ -159,7 +159,7 @@ class _CarRegistrationViewState extends State<CarRegistrationView> {
                       hintText: 'Ví dụ: City',
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Vui lòng nhập tên xe';
+                          return AppMessages.pleaseEnterCarName;
                         }
                         return null;
                       },
@@ -222,11 +222,11 @@ class _CarRegistrationViewState extends State<CarRegistrationView> {
                       hintText: 'Ví dụ: 72B-145.46',
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Vui lòng nhập biển số xe';
+                          return AppMessages.pleaseEnterCarLicensePlate;
                         }
 
                         if (!value.isCarLicensePlate) {
-                          return 'Biển số xe không hợp lệ';
+                          return AppMessages.invalidCarLicensePlate;
                         }
                         return null;
                       },
@@ -360,7 +360,8 @@ class _CarRegistrationViewState extends State<CarRegistrationView> {
                               if (value == null ||
                                   value.isEmpty ||
                                   !value.isNumber) {
-                                return 'Vui long nhập nắm sản xuất';
+                                return AppMessages
+                                    .pleaseEnterCarYearOfManufacture;
                               }
                               return null;
                             },
@@ -376,7 +377,7 @@ class _CarRegistrationViewState extends State<CarRegistrationView> {
                               if (value == null ||
                                   value.isEmpty ||
                                   !value.isNumber) {
-                                return 'Vui lòng nhập số chỗ ngồi';
+                                return AppMessages.pleaseEnterCarNumberOfSeats;
                               }
                               return null;
                             },
@@ -517,7 +518,8 @@ class _CarRegistrationViewState extends State<CarRegistrationView> {
                             hintText: 'Ví dụ: 7 lít/100km',
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Vui long nhập mức tiệu thụ xăng dầu';
+                                return AppMessages
+                                    .pleaseEnterCarFuelConsumption;
                               }
                               return null;
                             },
@@ -532,7 +534,7 @@ class _CarRegistrationViewState extends State<CarRegistrationView> {
                       hintText: 'Ví dụ: 123 Nguyễn Văn Cừ, Quận 5, TP.HCM',
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Vui long nhập vị trí';
+                          return AppMessages.pleaseEnterCarLocation;
                         }
                         return null;
                       },
@@ -550,7 +552,7 @@ class _CarRegistrationViewState extends State<CarRegistrationView> {
                               if (value == null ||
                                   value.isEmpty ||
                                   !value.isNumber) {
-                                return 'Vui lòng nhập giá thuê';
+                                return AppMessages.pleaseEnterCarPrice;
                               }
                               return null;
                             },
@@ -574,7 +576,7 @@ class _CarRegistrationViewState extends State<CarRegistrationView> {
                               if (value == null ||
                                   value.isEmpty ||
                                   !value.isNumber) {
-                                return 'Vui lòng nhập giới hạn quãng đường';
+                                return AppMessages.pleaseEnterCarLimitDistance;
                               }
                               return null;
                             },
@@ -609,7 +611,8 @@ class _CarRegistrationViewState extends State<CarRegistrationView> {
                               if (value == null ||
                                   value.isEmpty ||
                                   !value.isNumber) {
-                                return 'Vui lòng nhập phụ phí vượt quãng đường';
+                                return AppMessages
+                                    .pleaseEnterCarOverLimitDistanceFee;
                               }
                               return null;
                             },
@@ -637,7 +640,7 @@ class _CarRegistrationViewState extends State<CarRegistrationView> {
                               if (value == null ||
                                   value.isEmpty ||
                                   !value.isNumber) {
-                                return 'Vui lòng nhập phụ phí vượt quá giờ';
+                                return AppMessages.pleaseEnterCarOverTimeFee;
                               }
                               return null;
                             },
