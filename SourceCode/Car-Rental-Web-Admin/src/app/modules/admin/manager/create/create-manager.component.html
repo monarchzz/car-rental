@@ -19,9 +19,9 @@
                 <mat-form-field class="w-full">
                     <mat-label>Tên đăng nhập</mat-label>
                     <input matInput [formControlName]="'username'" />
-                    <mat-error *ngIf="createManagerForm.get('username').invalid && createManagerForm.get('username').touched 
+                    <mat-error *ngIf="createManagerForm.get('username').invalid && createManagerForm.get('username').touched
                     && createManagerForm.get('username').errors?.invalidUsername">
-                        Tài khoản phải ít hơn 20 ký tự và không chứa khoảng trắng.
+                        {{usernameMessage}}
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -31,9 +31,9 @@
                 <mat-form-field class="w-full">
                     <mat-label>Mật khẩu</mat-label>
                     <input matInput type="password" [formControlName]="'password'" />
-                    <mat-error class="text-red-500" *ngIf="createManagerForm.get('password').invalid && createManagerForm.get('password').touched 
+                    <mat-error class="text-red-500" *ngIf="createManagerForm.get('password').invalid && createManagerForm.get('password').touched
                         && createManagerForm.get('password').errors?.invalidPassword">
-                        Mật khẩu phải trên 8 ký tự chứa chữ in hoa và số.</mat-error>
+                        {{passwordMessage}}</mat-error>
                 </mat-form-field>
             </div>
 
@@ -42,9 +42,9 @@
                 <mat-form-field class="w-full">
                     <mat-label>Xác nhận</mat-label>
                     <input matInput type="password" [formControlName]="'confirmPassword'" />
-                    <mat-error *ngIf="createManagerForm.get('confirmPassword').invalid && createManagerForm.get('confirmPassword').touched 
+                    <mat-error *ngIf="createManagerForm.get('confirmPassword').invalid && createManagerForm.get('confirmPassword').touched
                         && createManagerForm.get('confirmPassword').errors?.invalidConfirmPassword">
-                        Mật khẩu không khớp.
+                        {{confirmPasswordMessage}}
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -74,7 +74,7 @@
                     <input matInput type="text" [formControlName]="'phone'" />
                     <mat-error
                         *ngIf="createManagerForm.get('phone').invalid && createManagerForm.get('phone').touched && createManagerForm.get('phone').errors?.phone">
-                        Vui lòng nhập số điện thoại đúng định dạng.
+                        {{phoneMessage}}
                     </mat-error>
                 </mat-form-field>
             </div>
