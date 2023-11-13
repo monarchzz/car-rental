@@ -4,6 +4,8 @@
 
 Hệ thống Cho Thuê Xe là một ứng dụng quản lý cho thuê xe với mục tiêu đơn giản hóa việc cho thuê xe. Góp phần giúp sức cho chủ xe muốn cho thuê, tài xế và khách hàng có nhu cầu thuê xe. 
 
+Web Manager: https://manager.synda.online/
+
 ## Tài Liệu
 
 ### Thư Mục "Docs"
